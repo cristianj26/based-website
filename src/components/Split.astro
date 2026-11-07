@@ -1,0 +1,34 @@
+---
+/**
+ * Splits text into masked words (or characters) at build time, so the
+ * reveal animation needs no runtime DOM work and no layout shift.
+ */
+import type { HTMLTag } from 'astro/types';
+interface Props { text: string; as?: HTMLTag; class?: string; mode?: 'words' | 'chars'; stagger?: number; delay?: number; trigger?: 'view' | 'load'; id?: string }
+const { text, as: Tag = 'h2', class: cls, mode = 'words', stagger, delay, trigger = 'view', id } = Astro.props;
+const lines = text.split('\n');
+let i = 0;
+const style = [stagger != null && `--stagger:${stagger}ms`, delay != null && `--d:${delay}s`].filter(Boolean).join(';');
+---
+<Tag id={id} class={cls} data-split={trigger} style={style || undefined} aria-label={text.replace(/\n/g, ' ')}>
+  {lines.map((line, li) => (
+    <>
+      {line.split(' ').map((word, wi, arr) =>
+        mode === 'chars' ? (
+          <>
+            <span class="split-word" aria-hidden="true" style="display:inline-block;white-space:nowrap">
+              {[...word].map((ch) => <span class="split-w"><span style={`--i:${i++}`}>{ch}</span></span>)}
+            </span>
+            {wi < arr.length - 1 && ' '}
+          </>
+        ) : (
+          <>
+            <span class="split-w" aria-hidden="true"><span style={`--i:${i++}`}>{word}</span></span>
+            {wi < arr.length - 1 && ' '}
+          </>
+        )
+      )}
+      {li < lines.length - 1 && <>{' '}<br /></>}
+    </>
+  ))}
+</Tag>

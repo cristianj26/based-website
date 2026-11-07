@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+import { FORM } from '../config';
+interface Props { messageLabel?: string; subject?: string; id?: string }
+const { messageLabel = 'Message*', subject = 'New enquiry from basedinc.com', id = 'contact-form' } = Astro.props;
+---
+<form class="form" action={FORM.endpoint} method="POST" data-form id={id} novalidate data-reveal style="--d:0.15s">
+  <input type="hidden" name="access_key" value={FORM.accessKey} />
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="from_name" value="Based website" />
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <div class="field">
+    <input id={`${id}-name`} name="name" type="text" placeholder=" " autocomplete="name" required />
+    <label for={`${id}-name`}>Name*</label>
+  </div>
+  <div class="field">
+    <input id={`${id}-email`} name="email" type="email" placeholder=" " autocomplete="email" required />
+    <label for={`${id}-email`}>Email*</label>
+  </div>
+  <div class="field">
+    <textarea id={`${id}-message`} name="message" placeholder=" " required></textarea>
+    <label for={`${id}-message`}>{messageLabel}</label>
+  </div>
+  <button type="submit" class="btn-solid"><span data-submit-label>Submit Now</span></button>
+  <p class="form__status" role="status" aria-live="polite" data-status></p>
+  <div class="form__success" tabindex="-1">
+    <Icon name="check" />
+    <h3>Thank you.</h3>
+    <p class="body">Your message is on its way. We’ll be in touch within one business day to schedule a quick introductory call.</p>
+  </div>
+</form>

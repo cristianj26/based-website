@@ -1,0 +1,11 @@
+---
+import Icon from './Icon.astro';
+import { url } from '../config';
+interface Props { href: string; label: string; light?: boolean; class?: string; [key: string]: unknown }
+const { href, label, light, class: cls, ...rest } = Astro.props;
+const to = href.startsWith('/') ? url(href) : href;
+---
+<a href={to} class:list={['btn', light && 'btn--light', cls]} {...rest}>
+  <span class="btn__icon"><Icon name="arrow-right" /><Icon name="arrow-right" /></span>
+  <span class="btn__label"><span>{label}</span><span aria-hidden="true">{label}</span></span>
+</a>

@@ -1,0 +1,29 @@
+---
+import { FAQ } from '../data/faq';
+---
+<section class="section faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="faq__wrap">
+      <div><h2 class="label" id="faq-title" data-reveal>FAQ</h2></div>
+      <div class="faq__list" data-faq>
+        {FAQ.map((item, i) => {
+          const n = String(i + 1).padStart(2, '0');
+          return (
+            <div class="faq__item" data-reveal style={`--d:${i * 0.05}s`}>
+              <h3>
+                <button type="button" class="faq__q" aria-expanded="false" aria-controls={`faq-a-${n}`} id={`faq-q-${n}`}>
+                  <span class="num">{n}</span>
+                  <span class="q">{item.q}</span>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq__a" id={`faq-a-${n}`} role="region" aria-labelledby={`faq-q-${n}`}>
+                <div><div class="body">{item.a.map((p) => <p>{p}</p>)}</div></div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>

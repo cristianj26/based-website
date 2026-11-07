@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro';
+import { NAV, url } from '../config';
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '').replace(/\/$/, '') || '/';
+---
+<div class="topbar" aria-hidden="true"></div>
+<header class="site-header" data-header>
+  <div class="container">
+    <a href={url('/')} class="logo" aria-label="Based, home">
+      {[...'Based.'].map((c) => <span aria-hidden="true">{c}</span>)}
+    </a>
+    <nav class="nav" aria-label="Main">
+      <ul class="nav__links">
+        {NAV.map((item) => (
+          <li>
+            <a href={url(item.href)} class="nav__link" aria-current={path === item.href ? 'page' : undefined}>
+              <span class="roll"><span>{item.label}</span><span aria-hidden="true">{item.label}</span></span>
+              <sup>{item.n}</sup>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <Button href="/contact" label="Get in touch" light />
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+  <nav aria-label="Mobile">
+    {NAV.map((item) => (
+      <a href={url(item.href)} class="mm-link" aria-current={path === item.href ? 'page' : undefined}>{item.label}<sup class="num">{item.n}</sup></a>
+    ))}
+  </nav>
+  <Button href="/contact" label="Get in touch" light />
+</div>

@@ -1,0 +1,15 @@
+---
+import Button from './Button.astro';
+import { SITE } from '../config';
+---
+<footer class="site-footer">
+  <div class="footer-card">
+    <p class="footer__title" data-reveal>Stay connected<sup>®</sup></p>
+    <div data-reveal style="--d:0.1s"><Button href="/contact" label="Get in touch" /></div>
+    <span class="footer__wordmark" aria-hidden="true" data-parallax="-0.08">Based<span>.</span></span>
+    <div class="footer__bottom">
+      <span>Copyright © {SITE.name} Limited</span>
+      <a href="#top" class="to-top" data-to-top>©Back to top</a>
+    </div>
+  </div>
+</footer>

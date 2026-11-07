@@ -1,0 +1,196 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Split from '../components/Split.astro';
+import Icon from '../components/Icon.astro';
+import Stairs from '../components/Stairs.astro';
+import Faq from '../components/Faq.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../config';
+
+import heroImg from '../assets/img/hero-mountain.jpg';
+import roadImg from '../assets/img/road.jpg';
+import geographyImg from '../assets/img/geography.jpg';
+import communityImg from '../assets/img/community.jpg';
+import profitabilityImg from '../assets/img/profitability.jpg';
+import teamImg from '../assets/img/team.jpg';
+
+const steps = [
+  { title: 'Listen & Learn', text: 'Dive deep into your story, challenges, and ambitions.' },
+  { title: 'Co-Create a Plan', text: 'Build a growth roadmap that honors your legacy and your vision.' },
+  { title: 'Roll Up Our Sleeves', text: 'Tackle marketing, tech, operations, or any gap that holds you back.' },
+];
+const fits = [
+  { img: geographyImg, title: 'Geography', text: 'Majority of customers in the U.S., Canada, U.K., or Europe' },
+  { img: communityImg, title: 'Community', text: 'You’re on your way to building a mini brand within your niche or sector and an engaged, vocal customer base' },
+  { img: profitabilityImg, title: 'Path to Profitability', text: 'Profitable or on a clear path to profitability with healthy gross margins.' },
+  { img: teamImg, title: 'Team', text: 'Strong teams and cultures we can continue building around.' },
+];
+const stats = [
+  { n: 20, suffix: '+', title: 'Years Experience', text: 'as Operators of business like yours.' },
+  { n: 4, suffix: '+', title: 'Investments', text: 'in last five years.' },
+  { n: 26, suffix: '%', title: 'YoY Growth', text: 'Average annual company revenue growth' },
+];
+const statsText =
+  'We take pride in forging partnerships that deliver measurable growth. Every metric tells a story and we’re dedicated to driving the numbers that matter for your business.';
+---
+<Base>
+  <div class="pin">
+  <!-- HERO -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero__media" data-zoom="pin" data-trail>
+      <Picture src={heroImg} alt="" widths={[640, 1024, 1440, 1920, 2464]} sizes="100vw" formats={['avif', 'webp']} loading="eager" fetchpriority="high" />
+    </div>
+    <div class="container hero__inner">
+      <Split as="h1" class="display hero__title" text="A permanent home for exceptional software businesses." trigger="load" stagger={45} />
+      <div class="hero__aside" data-reveal="load" style="--d:0.45s">
+        <span class="hero__globe"><Icon name="globe" /></span>
+        <p>Based acquires founder-led software companies with $500K–$5M in recurring revenue and helps them grow for the long term.</p>
+        <a href="#what-we-do" class="hero__down" aria-label="Scroll to content"><Icon name="arrow-down" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section class="section intro over" id="what-we-do" aria-labelledby="wwd" data-stairs>
+    <Stairs />
+    <div class="blobs" aria-hidden="true">
+      <div class="blob" style="left:-180px; top:40px" data-parallax="0.12"></div>
+      <div class="blob" style="right:-330px; top:440px; width:360px; height:520px" data-parallax="-0.1"></div>
+    </div>
+    <div class="container">
+      <div class="rule"></div>
+      <div class="grid">
+        <div class="intro__label"><h2 class="label" id="wwd" data-reveal>What We Do</h2></div>
+        <div class="intro__content">
+          <Split as="p" class="h2 intro__title" text="We acquire great software businesses and hold them for the long term." />
+          <div data-reveal style="--d:0.2s"><Button href="/contact" label="Get in touch" /></div>
+          <div class="intro__cols">
+            <div class="intro__col" data-reveal>
+              <h3>Built by operators, not financial engineers.</h3>
+              <div class="body">
+                <p>We’ve built and operated software businesses ourselves. We understand customer concentration, hiring engineers, enterprise sales cycles, product roadmaps, churn, integrations, cash flow and the thousand small decisions required to build an enduring software company.</p>
+              </div>
+            </div>
+            <div class="intro__col" data-reveal style="--d:0.12s">
+              <h3>Ideal Fits</h3>
+              <div class="body">
+                <p>We focus on businesses that:</p>
+                <p>• Solve core B2B or B2C challenges with elegant, scalable software</p>
+                <p>• Operate in SaaS, Service-as-Software, FinTech, InsurTech, or open-source ecosystems</p>
+                <p>• Demonstrate sound unit economics and have growth-hungry teams</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW WE DO IT -->
+      <div class="meta-row" style="margin-top:clamp(48px,6vw,72px); border-top:1px solid var(--line)">
+        <h2 class="label" data-reveal>How We Do It</h2>
+        <span class="num" data-reveal style="--d:0.1s">(BSD® — 2.0)</span>
+        <span aria-hidden="true" data-reveal style="--d:0.2s">-&gt;</span>
+      </div>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step" data-reveal style={`--d:${i * 0.12}s`}>
+            <div class="step__top">
+              <span class="step__n num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="dots" aria-hidden="true">{[0, 1, 2].map((d) => <i class:list={[d <= i && 'on']}></i>)}</span>
+            </div>
+            <div class="step__body">
+              <h3 class="step__title">{s.title}</h3>
+              <p>{s.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  </div>
+
+  <div class="pin">
+  <!-- ROAD -->
+  <section class="road" aria-label="Fueling your company's next chapter">
+    <div class="road__media" data-zoom="in">
+      <Picture src={roadImg} alt="" widths={[640, 900]} sizes="100vw" formats={['avif', 'webp']} />
+    </div>
+    <Split as="h2" class="display road__title" text={"Fueling Your Company's\nNext Chapter"} stagger={60} />
+  </section>
+
+  <!-- CRITERIA -->
+  <section class="section criteria" aria-labelledby="who">
+    <div class="container">
+      <div class="meta-row">
+        <span class="label" data-reveal>What We Look For</span>
+        <span class="num" data-reveal style="--d:0.1s">(BSD® — 2.0)</span>
+        <span data-reveal style="--d:0.2s">Criteria</span>
+      </div>
+      <div class="criteria__grid">
+        <div>
+          <Split as="h2" class="display criteria__title" id="who" text={'Who we\npartner\nwith'} stagger={70} />
+          <p class="criteria__sub" data-reveal>4+ years operating history, typically bootstrapped or early VC-backed.</p>
+          <ul class="checks">
+            <li data-reveal>Founder-run SaaS and subscription businesses</li>
+            <li data-reveal style="--d:0.08s">Profitable or with a clear path to profitability</li>
+          </ul>
+          <div data-reveal><Button href="/about" label="Learn more about us" /></div>
+        </div>
+        <ul class="fits">
+          {fits.map((f, i) => (
+            <li class="fit" data-reveal style={`--d:${i * 0.1}s`}>
+              <div class="fit__img"><Picture src={f.img} alt="" widths={[224]} sizes="112px" formats={['avif', 'webp']} /></div>
+              <div><h3>{f.title}</h3><p>{f.text}</p></div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <!-- STATS -->
+  <section class="section stats" aria-labelledby="stats">
+    <div class="container">
+      <div class="rule"></div>
+      <div class="stats__head">
+        <h2 class="label" id="stats" data-reveal>Stats &amp; Facts</h2>
+        <p class="stats__text" data-scrub>
+          {statsText.split(' ').map((w) => <><span class="sw">{w}</span> </>)}
+        </p>
+      </div>
+      <div class="stats__grid">
+        {stats.map((s, i) => (
+          <div class="stat" data-reveal style={`--d:${i * 0.12}s`}>
+            <p class="stat__n" aria-label={`${s.n}${s.suffix}`}><span data-count={s.n} aria-hidden="true">0</span><span aria-hidden="true">{s.suffix}</span></p>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq />
+
+  <!-- CONTACT -->
+  <section class="section connect" id="contact" aria-labelledby="ready" style="padding-top:0">
+    <div class="container">
+      <div class="meta-row" style="border-top:1px solid var(--line); margin-bottom:40px">
+        <span class="label" data-reveal>Let's Work Together</span>
+        <span class="num" data-reveal style="--d:0.1s">(BSD® — 2.0)</span>
+        <span class="num" data-reveal style="--d:0.2s">©{SITE.year}</span>
+      </div>
+      <div class="connect__grid">
+        <div class="connect__intro">
+          <span class="pill-tag" data-reveal><Icon name="send" />Reach Out</span>
+          <Split as="h2" class="display connect__title" id="ready" text={'Ready to\nTalk?'} stagger={60} />
+          <p class="lead" data-reveal>Let’s explore your next chapter together. Reach out to schedule a quick 15‑minute introductory call today.</p>
+        </div>
+        <ContactForm id="home-form" messageLabel="Tell us more about your company or venture*" subject="New enquiry from basedinc.com (home)" />
+      </div>
+    </div>
+  </section>
+</Base>

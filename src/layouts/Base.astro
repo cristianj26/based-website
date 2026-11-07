@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE, url } from '../config';
+import ogSrc from '../assets/img/hero-mountain.jpg';
+import fontUrl from '../assets/fonts/InterVariable-latin.woff2?url';
+
+interface Props { title?: string; description?: string; footer?: boolean }
+const { title = SITE.title, description = SITE.description, footer = true } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const og = await getImage({ src: ogSrc, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const ogUrl = new URL(og.src, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#ffb500" />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href={url('/favicon.ico')} sizes="48x48" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+    <link rel="manifest" href={url('/site.webmanifest')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Based" />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Snow-capped mountain peak. Based: a permanent home for exceptional software businesses." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogUrl} />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <noscript><style>.curtain{display:none}</style></noscript>
+    <ClientRouter fallback="swap" />
+  </head>
+  <body id="top">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="curtain is-covered" data-curtain transition:persist="curtain" aria-hidden="true">
+      {['top', 'bottom'].map((row) => (
+        <div class={`curtain__row curtain__row--${row}`}>
+          {[2, 1, 0, 1, 2].map((d) => <span style={`--d:${d}`}></span>)}
+        </div>
+      ))}
+    </div>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    {footer && <Footer />}
+    <script>
+      import { boot } from '../scripts/main';
+      boot();
+    </script>
+  </body>
+</html>

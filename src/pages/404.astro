@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Split from '../components/Split.astro';
+---
+<Base title="Page not found | Based" footer={false}>
+  <section class="hero" style="background:var(--ink-2)">
+    <div class="container hero__inner" style="flex-direction:column; align-items:flex-start; justify-content:center; gap:28px">
+      <span class="eyebrow" style="color:var(--gold)" data-reveal="load">404</span>
+      <Split as="h1" class="display hero__title" text="This page took a different road." trigger="load" />
+      <div data-reveal="load" style="--d:0.4s"><Button href="/" label="Back home" light /></div>
+    </div>
+  </section>
+</Base>

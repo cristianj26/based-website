@@ -1,0 +1,46 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Split from '../components/Split.astro';
+import Icon from '../components/Icon.astro';
+import Stairs from '../components/Stairs.astro';
+import Faq from '../components/Faq.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../config';
+import img from '../assets/img/clouds.jpg';
+---
+<Base title="Contact Based | Start a conversation" description="Reach out to Based to learn more about our model and start a private conversation about your software business.">
+  <div class="pin">
+  <section class="page-hero" aria-label="Contact us">
+    <div class="hero__media" data-zoom="pin" data-trail>
+      <Picture src={img} alt="" widths={[640, 900]} sizes="100vw" formats={['avif', 'webp']} loading="eager" fetchpriority="high" />
+    </div>
+    <div class="container hero__inner">
+      <Split as="h1" class="display page-hero__title" text="Contact Us*" mode="chars" trigger="load" stagger={45} />
+      <a href="#connect" class="hero__down" aria-label="Scroll to form" data-reveal="load" style="--d:0.5s"><Icon name="arrow-down" /></a>
+    </div>
+  </section>
+
+  <section class="section connect over" id="connect" aria-labelledby="lets-connect" data-stairs>
+    <Stairs />
+    <div class="container">
+      <div style="border-top:1px solid var(--line); margin-bottom:56px"></div>
+      <div class="connect__grid">
+        <div class="connect__intro">
+          <span class="pill-tag" data-reveal><Icon name="send" />Contact Now</span>
+          <Split as="h2" class="display connect__title" id="lets-connect" text="Let's Connect" stagger={60} />
+          <p class="lead" data-reveal>Reach out to learn more about our model.</p>
+          <address class="address" data-reveal style="font-style:normal">
+            <Icon name="pin" />
+            <strong>Address</strong>
+            <span>{SITE.address}</span>
+          </address>
+        </div>
+        <ContactForm id="contact-form" subject="New enquiry from basedinc.com (contact)" />
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <Faq />
+</Base>

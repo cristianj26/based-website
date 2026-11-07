@@ -1,0 +1,22 @@
+---
+interface Props { name: 'arrow-right' | 'arrow-down' | 'globe' | 'send' | 'pin' | 'check'; class?: string }
+const { name, class: cls } = Astro.props;
+---
+{name === 'arrow-right' && (
+  <svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+)}
+{name === 'arrow-down' && (
+  <svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7" /></svg>
+)}
+{name === 'globe' && (
+  <svg class={cls} viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><ellipse cx="32" cy="32" rx="29" ry="18" /><ellipse cx="32" cy="32" rx="12" ry="18" /><path d="M3 32h58M8 22h48M8 42h48M32 14v36" /></svg>
+)}
+{name === 'send' && (
+  <svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z" /></svg>
+)}
+{name === 'pin' && (
+  <svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+)}
+{name === 'check' && (
+  <svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+)}

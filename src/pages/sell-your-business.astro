@@ -1,0 +1,82 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Split from '../components/Split.astro';
+import archImg from '../assets/img/arch.jpg';
+import officeImg from '../assets/img/office.jpg';
+
+const process = [
+  { t: 'Intro conversation', p: 'No banker. No giant data room. Just an honest conversation about the business and what you want next.' },
+  { t: 'Initial proposal', p: 'Based can make an indication quickly, so you have a clear sense of what a partnership could look like.' },
+  { t: 'Diligence', p: 'We look closely at financials, customers, product, and technology—always with respect for the work already done.' },
+  { t: 'Close', p: 'Most transactions take 60–90 days. We keep the process moving, communicate directly, and make the final steps feel deliberate—not drawn out.' },
+  { t: 'Choose your next chapter', p: 'The right transition is personal. We’ll shape the role you want after close, together.' },
+];
+const outcomes = [
+  { t: 'Stay on as CEO', p: 'Keep leading the company you built, with a partner focused on its long-term potential.' },
+  { t: 'Remain involved strategically', p: 'Step back from the day-to-day while continuing to shape the decisions that matter most.' },
+  { t: 'Transition over 6–12 months', p: 'Hand over responsibilities with a clear, thoughtful transition plan that protects customers, team, and momentum.' },
+  { t: 'Exit completely', p: 'Move on to what’s next, confident the company has a permanent home and the resources to keep growing.' },
+];
+---
+<Base title="Sell your software company | Based" description="Considering selling your software company? Based offers a straightforward process with no bankers, closes in 60–90 days, and gives you a choice of what comes next.">
+  <div class="sell">
+    <section class="sell-hero" aria-labelledby="sell-title">
+      <div class="hero__media" data-zoom="out" style="position:absolute;inset:0">
+        <Picture src={archImg} alt="" widths={[640, 1280, 1920, 2880]} sizes="100vw" formats={['avif', 'webp']} loading="eager" fetchpriority="high" style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div class="container sell-hero__inner">
+        <span class="eyebrow" data-reveal="load">Sell your business</span>
+        <Split as="h1" id="sell-title" text="Considering selling your software company?" trigger="load" stagger={45} delay={0.05} />
+        <p data-reveal="load" style="--d:0.35s">You’ve spent years building it. We’re interested in what happens during the next decade, not just the next five years.</p>
+        <div data-reveal="load" style="--d:0.5s"><Button href="/contact" label="Start a private conversation" light /></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="transaction">
+      <div class="container">
+        <div class="sell-head">
+          <h2 class="eyebrow" id="transaction" data-reveal>The transaction</h2>
+          <p data-reveal style="--d:0.1s">A straightforward process, built around the business and the future you want.</p>
+        </div>
+        <ol class="process">
+          {process.map((s, i) => (
+            <li data-reveal style={`--d:${i * 0.06}s`}>
+              <span class="process__n num">{String(i + 1).padStart(2, '0')}</span>
+              <div><h3>{s.t}</h3><p>{s.p}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section outcomes-sec" aria-labelledby="next">
+      <div class="container">
+        <span class="eyebrow" data-reveal>Your next chapter</span>
+        <Split as="h2" id="next" text="There’s more than one good outcome." stagger={50} />
+        <div class="outcomes">
+          {outcomes.map((o, i) => (
+            <article class="outcome" data-reveal style={`--d:${(i % 2) * 0.1 + Math.floor(i / 2) * 0.08}s`}>
+              <span class="process__n num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{o.t}</h3>
+              <p>{o.p}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" aria-labelledby="cta">
+      <div class="hero__media" data-zoom="in" style="position:absolute;inset:-10% 0">
+        <Picture src={officeImg} alt="" widths={[640, 1280, 1920]} sizes="100vw" formats={['avif', 'webp']} style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div class="container cta-band__inner">
+        <span class="eyebrow" data-reveal>A private conversation</span>
+        <Split as="h2" id="cta" text="Start with a conversation, not a process." stagger={50} />
+        <p data-reveal style="--d:0.15s">Tell us about the company you’ve built and the future you want for it.</p>
+        <div data-reveal style="--d:0.25s"><Button href="/contact" label="Get in touch" light /></div>
+      </div>
+    </section>
+  </div>
+</Base>

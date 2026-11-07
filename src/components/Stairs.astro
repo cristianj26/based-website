@@ -1,0 +1,7 @@
+---
+// Stepped blocks that rise over the bottom of a section as it scrolls away.
+const heights = [0.55, 0.9, 0.7, 0.35, 1, 0.6, 0.8, 0.45];
+---
+<div class="stairs" aria-hidden="true">
+  {heights.map((h) => <span style={`--h:${h}`}></span>)}
+</div>

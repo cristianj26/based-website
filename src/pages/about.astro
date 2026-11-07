@@ -1,0 +1,55 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Split from '../components/Split.astro';
+import Icon from '../components/Icon.astro';
+import Stairs from '../components/Stairs.astro';
+import Faq from '../components/Faq.astro';
+import img from '../assets/img/about-mountain.jpg';
+
+const rows = [
+  { h: 'What We Do', p: ['Partner with owner‑run businesses to unlock growth and operational efficiency. Provide capital and hands‑on support to early‑stage SaaS, FinTech, and InsurTech innovators. Maintain selective positions in protocols and tokens that address real‑world challenges.'] },
+  { h: 'Our Team', p: ['A lean group of seasoned researchers, engineers, and M&A advisors, with backgrounds running Financial Services, SaaS and Marketplaces.'] },
+  { h: 'Our Focus Areas', p: ['We invest in businesses that:', '• Deliver clear solutions to core B2B or B2C challenges', '• Operate within SaaS, FinTech, InsurTech, or open-source ecosystems', '• Demonstrate proven market traction and robust unit economics'] },
+  { h: 'By the Numbers', p: ['• Over 400%+ IRR on our original crypto strategies (2016–2021)', '• 5 businesses acquired or invested in', '• 60–90 days average transaction timeline', '• $500K–$5M target recurring revenue range for private businesses. No cap for liquid tokens or publicly traded stocks on major exchanges.'] },
+];
+---
+<Base title="About Based | A permanent home for founder-led software companies" description="Based is a permanent home for profitable, founder-led software companies. We acquire businesses that can endure for decades and help them grow with capital, technology and hands-on operating experience.">
+  <div class="pin">
+  <section class="page-hero" aria-label="About us">
+    <div class="hero__media" data-zoom="pin" data-trail>
+      <Picture src={img} alt="" widths={[640, 1200]} sizes="100vw" formats={['avif', 'webp']} loading="eager" fetchpriority="high" style="object-position:50% 30%" />
+    </div>
+    <div class="container hero__inner">
+      <Split as="h1" class="display page-hero__title" text="About Us." mode="chars" trigger="load" stagger={45} />
+      <a href="#about-intro" class="hero__down" aria-label="Scroll to content" data-reveal="load" style="--d:0.5s"><Icon name="arrow-down" /></a>
+    </div>
+  </section>
+
+  <section class="section about-intro intro over" id="about-intro" aria-labelledby="long-term" data-stairs>
+    <Stairs />
+    <div class="blobs" aria-hidden="true"><div class="blob" style="left:-200px; top:520px" data-parallax="0.12"></div></div>
+    <div class="container">
+      <div class="rule"></div>
+      <div class="grid">
+        <div class="intro__label"><h2 class="label" id="long-term" data-reveal>Building for the long term</h2></div>
+        <div class="intro__content">
+          <Split as="p" class="about-intro__text" text="Based is a permanent home for profitable, founder-led software companies. We acquire businesses we believe can endure for decades, preserve what makes them special, and help them grow with capital, technology and hands-on operating experience." stagger={18} />
+          <div data-reveal><Button href="/contact" label="Get in touch" /></div>
+          <div class="rows">
+            {rows.map((r) => (
+              <div class="row" data-reveal>
+                <h3>{r.h}</h3>
+                <div class="body num">{r.p.map((t) => <p>{t}</p>)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <Faq />
+</Base>
